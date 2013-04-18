@@ -5,6 +5,7 @@ A simple and straightforward weather script to use with CLI.
 Maximum 20 requests/hour due to API limitations.
 
 **How it works**:
+
 1. get external IP
 2. get location by external IP
 3. get weather data by location
@@ -14,12 +15,12 @@ Maximum 20 requests/hour due to API limitations.
 * [OpenWeatherMap JSON API](http://openweathermap.org/wiki/API/JSON_API)
 * [geobytes IP locator](http://www.geobytes.com/IpLocator.htm?GetLocation)
 
-**To Do:
+**To Do**:
 - [GMT => localtime conversion]
 - [degree sign]
 - [wind direction]
 
-**Usage:
+**Usage**:
 	$ git clone git://github.com/evgorch/weather.git
 	$ chmod +x weather.py
 then

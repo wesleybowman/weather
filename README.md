@@ -21,10 +21,13 @@ Maximum 20 requests/hour due to API limitations.
 - [wind direction]
 
 **Usage**:
-	 git clone git://github.com/evgorch/weather.git
-	 chmod +x weather.py 
+
+	$ git clone git://github.com/evgorch/weather.git
+	$ chmod +x weather.py 
+
 then
-	 ./weather.py
+
+ 	$ ./weather.py
 
 **Sample output**:
 

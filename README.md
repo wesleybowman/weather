@@ -18,6 +18,7 @@ Maximum 20 requests/hour due to API limitations.
 
 **To Do**:
 - improve time 
+- "C" => "°C"
 
 **Usage**:
 

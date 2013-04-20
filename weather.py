@@ -1,11 +1,9 @@
 #! /usr/bin/env python
+# -*- coding: utf-8 -*-
 
-
-
-
-import requests
 import json
-
+import requests
+from time import gmtime, strftime
 
 # URLs for retrieving IP, locations, weather data
 
@@ -30,29 +28,30 @@ def get_weather_data(city, country, units='metric'):
 	return weather_json
 
 def output_weather(weather):
-	city = weather['list'][0]['name']
-	country = weather['list'][0]['sys']['country']
-	date = weather['list'][0]['date']
-	temp = weather['list'][0]['main']['temp']
-	desc = weather['list'][0]['weather'][0]['description']
-	windspeed = weather['list'][0]['wind']['speed']
-	humidity = weather['list'][0]['main']['humidity']
-
+	w=weather['list'][0]  #temp var to decrease number of chars used
+	city = w['name']
+	country = w['sys']['country']
+	date = w['date'][:-3]
+	temp = round(w['main']['temp'])
+	desc = w['weather'][0]['description']
+	windspeed = w['wind']['speed']
+	humidity = w['main']['humidity']
+	current_time = strftime("%Y-%m-%d %H:%M",gmtime())
 	print(
 	"""
-	#########################
 	{0}
-	Last updated: {1} GMT
-
-	Temperature:	{2} C
-	Condition:	{3}
-	Wind:		{4} m/s
-	Humidity:	{5} %
-	#########################
+	Updated:	{1} GMT
+	Time now:	{2} GMT
+	------------------------------------
+	Temperature:	{3}  C
+	Condition:	{4}
+	Wind:		{5} m/s
+	Humidity:	{6} %
 	"""
 	.format(
 		city+', '+country,
 		date,
+		current_time,
 		temp,
 		desc,
 		windspeed,

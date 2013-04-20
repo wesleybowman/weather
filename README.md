@@ -28,13 +28,13 @@ Maximum 20 requests/hour due to API limitations.
 
 **Sample output**:
 	
-[evg@arch weather]$ ./weather.py 
+        [evg@arch weather]$ ./weather.py 
 
-        Ottawa, CA
-        Updated:        2013-04-20 01:40 GMT
-        Time now:       2013-04-20 02:22 GMT
-        ------------------------------------
-        Temperature:    9  C
-        Condition:      overcast clouds
-        Wind:           2.57 m/s
-        Humidity:       83 %
+                Ottawa, CA
+                Updated:        2013-04-20 01:40 GMT
+                Time now:       2013-04-20 02:22 GMT
+                ------------------------------------
+                Temperature:    9  C
+                Condition:      overcast clouds
+                Wind:           2.57 m/s
+                Humidity:       83 %

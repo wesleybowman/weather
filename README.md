@@ -1,7 +1,8 @@
-weather
-=======
+weather.py
+==========
 
-A simple and straightforward weather script to use with CLI.
+A simple weather script to use from CLI.
+
 Maximum 20 requests/hour due to API limitations.
 
 **How it works**:
@@ -16,27 +17,24 @@ Maximum 20 requests/hour due to API limitations.
 * [geobytes IP locator](http://www.geobytes.com/IpLocator.htm?GetLocation)
 
 **To Do**:
-- [GMT => localtime conversion]
-- [degree sign]
-- [wind direction]
+- improve time 
 
 **Usage**:
 
 	$ git clone git://github.com/evgorch/weather.git
+	$ cd weather/
 	$ chmod +x weather.py 
-
-then
-
  	$ ./weather.py
 
 **Sample output**:
+	
+[evg@arch weather]$ ./weather.py 
 
-	#########################
-	Ottawa, CA
-	Last updated: 2013-04-18 00:50:47 GMT
-
-	Temperature:	7.74 C
-	Condition:		overcast clouds
-	Wind:			3.1 m/s
-	Humidity:		31 %
-	#########################
+        Ottawa, CA
+        Updated:        2013-04-20 01:40 GMT
+        Time now:       2013-04-20 02:22 GMT
+        ------------------------------------
+        Temperature:    9  C
+        Condition:      overcast clouds
+        Wind:           2.57 m/s
+        Humidity:       83 %

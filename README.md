@@ -7,9 +7,8 @@ Maximum 20 requests/hour due to API limitations.
 
 **How it works**:
 
-1. get external IP
-2. get location by external IP
-3. get weather data by location
+1. get location by external IP
+2. get weather data by location
 
 
 **What it uses**:
@@ -17,12 +16,11 @@ Maximum 20 requests/hour due to API limitations.
 * [OpenWeatherMap JSON API](http://openweathermap.org/wiki/API/JSON_API)
 * [geobytes IP locator](http://www.geobytes.com/IpLocator.htm?GetLocation)
 
-**Requirements:
+**Requirements**:
 * python3
 * [requests](http://docs.python-requests.org/) module
 
 **To Do**:
-- improve time 
 - "C" => "°C"
 
 **Usage**:

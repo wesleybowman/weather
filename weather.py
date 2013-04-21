@@ -1,61 +1,49 @@
 #! /usr/bin/env python
-# -*- coding: utf-8 -*-
 
-import json
-import requests
+import sys
+import requests as r
 from functools import reduce
 from time import gmtime, strftime
 
-
-# URLs for retrieving IP, locations, weather data
-
-IP_URL = "http://ipecho.net/plain"
-LOCATION_URL = "http://www.geobytes.com/IpLocator.htm?GetLocation"
+# URL constants 
+LOCATION_URL = "http://www.geobytes.com/IpLocator.htm"
 WEATHER_URL = "http://api.openweathermap.org/data/2.1/find/name"
 
 
-def safe_get(*args):
+def safe_get(critical,*args):
 	try:
 		return reduce(lambda a,b: a[b], args)
 	except KeyError:
+		if critical:
+			sys.exit("Oops! Corrupted data :(")
 		return 'N/A'
 
-def get_IP():
-	return requests.get(IP_URL).text
-
-def get_location(ip):
-	location_params = {'template':'json.txt', 'IpAddress':ip}
-	location_json = requests.get(LOCATION_URL, params=location_params).json()
-	country = safe_get(location_json,'geobytes','country')
-	city = safe_get(location_json,'geobytes','city')
+def get_location():
+	try:
+		location = r.get(LOCATION_URL, params={'template':'json.txt'}).json()
+	except r.ConnectionError:
+		sys.exit("Unable to connect :(")
+	country = safe_get(True, location, 'geobytes', 'country')
+	city = safe_get(True, location, 'geobytes', 'city')
 	return (city, country)
 
-def get_weather_data(city, country, units='metric'):
+def get_weather_data(city, country, units='metric'):	
 	weather_params = {'q':'{0},{1}'.format(city,country), 'units': units}
-	weather_json = requests.get(WEATHER_URL, params=weather_params).json()
-
-	w = safe_get(weather_json,'list',0)  #temp var 
-	
+	weather = r.get(WEATHER_URL, params=weather_params).json()
+	w = safe_get(True, weather,'list',0)  #temp var 
 	weather_data = {
-		'city' : 		safe_get(w,'name'),
-		'country' : 	safe_get(w,'sys','country'),
-		'date' : 		safe_get(w,'date'),
-		'temp' :		safe_get(w,'main','temp'), 
-		'description' :	safe_get(w,'weather',0,'description'),
-		'windspeed' : 	safe_get(w,'wind','speed'),
-		'humidity' : 	safe_get(w,'main','humidity')
+		'city' : 	safe_get(True, w, 'name'),				 # city and country are retrieved	
+		'country' : 	safe_get(True, w, 'sys', 'country'), # again from weather data 
+		'date' : 	safe_get(True, w, 'date'),
+		'temp' :	round(safe_get(True, w, 'main', 'temp')), 
+		'description' :	safe_get(False, w, 'weather', 0, 'description'),
+		'windspeed' : 	safe_get(False, w, 'wind', 'speed'),
+		'humidity' : 	safe_get(False, w, 'main', 'humidity')
 	}
-
-	try:
-		weather_data['temp']=round(weather_data['temp'])
-	except TypeError:
-		pass
-
 	return weather_data
 
 def output_weather(weather_data):
 	current_time = strftime("%Y-%m-%d %H:%M:%S",gmtime())
-
 	print(
 	"""
 	{0}
@@ -79,8 +67,7 @@ def output_weather(weather_data):
 	)
 
 def main():
-	ip=get_IP()
-	city,country=get_location(ip)
+	city,country=get_location()
 	weather=get_weather_data(city,country)
 	output_weather(weather)
 

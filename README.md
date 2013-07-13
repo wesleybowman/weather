@@ -10,7 +10,6 @@ Maximum 20 requests/hour due to API limitations.
 1. get location by external IP
 2. get weather data by location
 
-
 **What it uses**:
 * [requests](http://docs.python-requests.org/) module
 * [OpenWeatherMap JSON API](http://openweathermap.org/wiki/API/JSON_API)
@@ -19,9 +18,6 @@ Maximum 20 requests/hour due to API limitations.
 **Requirements**:
 * python3
 * [requests](http://docs.python-requests.org/) module
-
-**To Do**:
-- "C" => "°C"
 
 **Usage**:
 
@@ -42,3 +38,15 @@ Maximum 20 requests/hour due to API limitations.
         Wind:           9.8 (m/s)
         Humidity:       48 (%)
         Condition:      overcast clouds
+
+[wesley@ArchLinux weather]$ python weather.py
+
+	Halifax, CA
+	Updated:	2013-07-13 12:00:00 GMT
+	Time now:	2013-07-13 13:38:38 GMT
+	---------------------------------------
+	Temperature:	20 (°C)
+	Wind:		3.1 (m/s)
+	Humidity:	72 (%)
+	Condition:	few clouds
+

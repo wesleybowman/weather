@@ -5,7 +5,7 @@ import requests as r
 from functools import reduce
 from time import gmtime, strftime
 
-# URL constants 
+# URL constants
 LOCATION_URL = "http://www.geobytes.com/IpLocator.htm"
 WEATHER_URL = "http://api.openweathermap.org/data/2.1/find/name"
 
@@ -27,15 +27,15 @@ def get_location():
 	city = safe_get(True, location, 'geobytes', 'city')
 	return (city, country)
 
-def get_weather_data(city, country, units='metric'):	
+def get_weather_data(city, country, units='metric'):
 	weather_params = {'q':'{0},{1}'.format(city,country), 'units': units}
 	weather = r.get(WEATHER_URL, params=weather_params).json()
-	w = safe_get(True, weather,'list',0)  #temp var 
+	w = safe_get(True, weather,'list',0)  #temp var
 	weather_data = {
-		'city' : 	safe_get(True, w, 'name'),				 # city and country are retrieved	
-		'country' : 	safe_get(True, w, 'sys', 'country'), # again from weather data 
+		'city' : 	safe_get(True, w, 'name'),				 # city and country are retrieved
+		'country' : 	safe_get(True, w, 'sys', 'country'), # again from weather data
 		'date' : 	safe_get(True, w, 'date'),
-		'temp' :	round(safe_get(True, w, 'main', 'temp')), 
+		'temp' :	round(safe_get(True, w, 'main', 'temp')),
 		'description' :	safe_get(False, w, 'weather', 0, 'description'),
 		'windspeed' : 	safe_get(False, w, 'wind', 'speed'),
 		'humidity' : 	safe_get(False, w, 'main', 'humidity')
@@ -50,7 +50,7 @@ def output_weather(weather_data):
 	Updated:	{1} GMT
 	Time now:	{2} GMT
 	---------------------------------------
-	Temperature:	{3} (C)
+	Temperature:	{3} (\u00b0C)
 	Wind:		{5} (m/s)
 	Humidity:	{6} (%)
 	Condition:	{4}
@@ -62,7 +62,7 @@ def output_weather(weather_data):
 		weather_data['temp'],
 		weather_data['description'],
 		weather_data['windspeed'],
-		weather_data['humidity']		
+		weather_data['humidity']
 		)
 	)
 
